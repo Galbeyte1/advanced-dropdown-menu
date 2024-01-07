@@ -11,3 +11,177 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+:root {
+  --bg:  #242526;
+  --bg-accent: #484a4d;
+  --text-color: #dadce1;
+  --nav-size: 60px;
+  --border: 1px solid #474a4d;
+  --border-radius: 8px;
+  --speed: 500ms; 
+}
+
+/*
+  Overwriting defualt unordered list style
+*/
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/*
+  Link elements to match them to text color variable in color scheme
+*/
+
+a {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+/*
+  Navbar is a fixed rectangle at the top
+  Fixed height based on the nav size var
+*/
+.navbar {
+  height: var(--nav-size);
+  background-color: var(--bg);
+  padding: 0 1rem;
+  border-bottom: var(--border);
+}
+
+/*
+  The ul is the container for the children
+  taking up 100% width and heigh of parent
+  all the children will start at the right
+  hand side instead of default left
+  by saying justify content flex end
+*/
+.navbar-nav {
+  max-width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+
+}
+
+/*
+  Each NavItem is a box slightly smaller
+  than the Navbar itself. Easy was to manage
+  with is to calculate it dynamically
+  60px * 0.8
+  Each navitem should display their children
+  to the center. Easily done using flex box
+*/
+.nav-item {
+  width: calc(var(--nav-size) * 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/*
+  We want an icon button with a circular shape
+  We will scope a new CSS var called button size
+  to give us 50% of the OG navbar size
+  a border radius of 50% creates a perf circle
+  We want to center the children directly in the
+  middle so we create flex box again
+  we might want to change the color slightly
+  when these items are hovered over using transition
+  durated to 300ms
+*/
+.icon-button {
+  --button-size: calc(var(--nav-size) * 0.5);
+  width: var(--button-size);
+  height: var(--button-size);
+  background-color: #484a4d;
+  border-radius: 50%;
+  padding: 5px;
+  margin: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: filter 300ms;
+}
+
+/*
+  The filter property mentioned earlier
+  will have a brightness increase on hover
+  using this pseudo selector "hover"
+*/
+.icon-button:hover {
+  filter: brightness(1.2);
+}
+
+/*
+  SVG icons don't inherit a size by default
+  so we will set a fixed width and height
+*/
+.icon-button svg {
+  fill: var(--text-color);
+  width: 20px;
+  height: 20px;
+}
+
+/*
+  To have the dropdown menu overlap
+  slightly with the navbar we can achieve this
+  effect using absoulte positioning 
+  it allows us to explicitly offeset an elemnt 
+  based on its container
+
+  From the top of the parent navbar will move the
+  dropdown 58px, overlaping with the top navbar by 2px
+
+  we can give it a fixed width of 300px and translate it
+  (move) its x axis by 45%
+
+  we want to make sure the overflow property is set to
+  hidden. this hides any child element if they overlap
+  this container
+
+*/
+.dropdown {
+  position: absolute;
+  top: 58px;
+  width: 300px;
+  transform: translateX(-45%);
+  background-color: var(--bg);
+  border: var(--border);
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  overflow: hidden;
+}
+
+/*
+  Now the dropdown has multiple menu items
+  we'll set these up as flex containers that
+  align their items to the center
+
+  when a user hovers over a menu item we want
+  to animate the background color so we will
+  setup a transition
+*/
+.menu-item {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  border-radius: var(--border-radius);
+  transition: background --speed;
+  padding: 0.5rem;
+}
+
+.menu-item:hover {
+  background-color: #525357;
+}
+
+/*
+  With flex box you can set the last item
+  to auto and that will push it to the right
+  and everything else to the left
+*/
+.icon-right {
+  margin-left: auto;
+}
