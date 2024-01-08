@@ -153,6 +153,11 @@ a {
   border-radius: var(--border-radius);
   padding: 1rem;
   overflow: hidden;
+  /*
+    the height is passed from the state
+  */
+
+  transition: height var(--speed) ease;
 }
 
 /*
@@ -164,6 +169,9 @@ a {
   to animate the background color so we will
   setup a transition
 */
+.menu {
+  width: 100%;
+}
 .menu-item {
   height: 50px;
   display: flex;
@@ -171,6 +179,10 @@ a {
   border-radius: var(--border-radius);
   transition: background --speed;
   padding: 0.5rem;
+}
+
+.menu-item .icon-button:hover {
+  filter: none;
 }
 
 .menu-item:hover {
@@ -184,4 +196,76 @@ a {
 */
 .icon-right {
   margin-left: auto;
+}
+
+/*
+  CSSTransition classNames
+
+  When the in-prop becomes true it will add the
+  menu-primary-enter class to the div
+  after a timeout of 500ms it will then activate the
+  menu-primary-enter-active class
+
+  When the in-prop becomes false it will add the
+  menu-primary-exit class to the div
+  after a timeout of 500ms it will then activate the
+  menu-primary-exit-active class
+*/
+
+/*
+  We want our main menu to slide from left to right, so init
+  we will translate it to the left 110% so it will be completely
+  invisible off to the left
+*/
+.menu-primary-enter {
+  position: absolute;
+  transform: translateX(-110%);
+}
+
+/*
+  After 500ms we will bring the translate back to zero so it will
+  be in it's normal position.
+  Then we can animate it using our transition property and timing
+  variable of ease
+*/
+.menu-primary-enter-active {
+  transform: translateX(0%);
+  transition: all var(--speed) ease;
+}
+
+/*
+  We will do the same thing above but in the opposite direction
+*/
+.menu-primary-exit {
+  position: absolute;
+
+}
+
+.menu-primary-exit-active {
+  transform: translateX(-110%);
+  transition: all var(--speed) ease;
+}
+
+
+
+/*
+  Transition for the seconary menu to be toggled: Settings
+*/
+.menu-secondary-enter {
+  position: absolute;
+  transform: translateX(110%);
+}
+
+.menu-secondary-enter-active {
+  transform: translateX(0%);
+  transition: all var(--speed) ease;
+}
+
+.menu-secondary-exit {
+
+}
+
+.menu-secondary-exit-active {
+  transform: translateX(110%);
+  transition: all var(--speed) ease;
 }
